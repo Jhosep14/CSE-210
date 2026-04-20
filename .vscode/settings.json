@@ -1,8 +1,8 @@
 {
-  "github.copilot.enable": {
-    "*": false,
-    "plaintext": false,
-    "markdown": false,
-    "csharp": false
+  "dotnetAcquisitionExtension.existingDotnetPath": [
+    "/Volumes/Briana/BYU-I_Winter/.dotnet/dotnet"
+  ],
+  "terminal.integrated.env.osx": {
+    "PATH": "/Volumes/Briana/BYU-I_Winter/.dotnet:${env:PATH}"
   }
 }
