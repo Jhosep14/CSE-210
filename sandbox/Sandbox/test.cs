@@ -1,31 +1,16 @@
-public class Test
+public class Person
 {
-    public static void RunCode()
+    public string _firstName;
+    public string _lastName;
+    
+    public void ShowEasternName()
     {
-        int age = 14;
-        int y = 18;
-        Console.Write("What's your favorite color?");
-        string color = Console.ReadLine();
-
-        Console.WriteLine(age);
-
-        if (age>y)
-        {
-            Console.WriteLine("greater");
-        }
-        else
-        {
-            Console.WriteLine("lesser");
-        }
-        if (color == "red")
-        {
-            Console.WriteLine("Good choice");
-            Console.WriteLine("Do it again!");
-        }
-        else
-        {
-            Console.WriteLine("You suck!");
-        }
+        Console.WriteLine($"{_lastName}, {_firstName}");
     }
-}
+    
+    public void ShowWesternName()
+    {
+        Console.WriteLine($"{_firstName} {_lastName}");
+    }
 
+}
