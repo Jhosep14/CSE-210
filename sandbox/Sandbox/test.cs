@@ -1,16 +1,27 @@
-public class Person
+public class NameList
 {
-    public string _firstName;
-    public string _lastName;
-    
-    public void ShowEasternName()
+    List<string> _namesList = new List<string>();
+
+    public void addName(string name)
     {
-        Console.WriteLine($"{_lastName}, {_firstName}");
+        if (name == "quit")
+        {
+            return;
+        }
+        else
+        {
+            _namesList.Add(name);
+        }
     }
-    
-    public void ShowWesternName()
+
+    public void displayList()
     {
-        Console.WriteLine($"{_firstName} {_lastName}");
+        Console.WriteLine("Names in list");
+        Console.WriteLine("-------------");
+        foreach (string name in _namesList)
+        {
+            Console.WriteLine(name);
+        }
     }
 
 }
