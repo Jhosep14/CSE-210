@@ -46,12 +46,17 @@ class Program
                 newEntry.SaveEntry(prompt, response);
                 Console.WriteLine("Entry Saved!");
             }
+            // I added the remove entry function 
+            // This allows the user to remove an entry based on the date they provide in the prompt 
+            // and then select the entry they want to remove. 
             else if (choice == "4")
             {
                 Console.WriteLine("-------------------------------------------");
                 Console.Write("Insert Journal Entry Date to Remove (dd/MM/yyyy): ");
                 date_to_remove = Console.ReadLine();
+                
                 Console.WriteLine("-------------------------------------------");
+                
                 Journal journal = new Journal();
                 journal.RemoveJournalEntry(date_to_remove); 
                 
