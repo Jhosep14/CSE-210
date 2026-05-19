@@ -16,14 +16,6 @@ class Program
         animation.Add("\\");
         animation.Add("|");
 /*
-
-        foreach (string s in animation)
-        {
-            Console.Write(s);
-            Thread.Sleep(1000);
-            Console.Write("\b");
-        }
-*/
         DateTime startTime = DateTime.Now;
         DateTime endTime = startTime.AddSeconds(8);
 
@@ -42,8 +34,37 @@ class Program
                 i = 0;
             }
         }
-        Console.WriteLine();
+
+        foreach (string s in animation)
+        {
+            Console.Write(s);
+            Thread.Sleep(500);
+            Console.Write("\b");
+        }
         Console.WriteLine("Done");
-    }
+
+        int seconds = 10;
+        for (int i = seconds; i > 0; i--)
+        {
+            Console.Write(i);
+            Thread.Sleep(1000);
+            Console.Write("\b\b  \b\b"); 
+        }
+*/
+        int seconds = 50;
+        int animationIndex = 0;
+        for (int i = 0; i < seconds; i++)
+        {
+            string character = animation[animationIndex];
+            Console.Write(character);
+            Thread.Sleep(500);
+            Console.Write("\b");
+            
+            animationIndex++;
+            if (animationIndex >= animation.Count)
+            {
+                animationIndex = 0;
+            }
+        }
     }
 }

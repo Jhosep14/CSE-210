@@ -1,0 +1,2 @@
+SimpleGoal,Do exercise,Do exercise at least once per week,50,False
+ChecklistGoal,Wake up early,Wake up daily at 6 am,150,2,500,0
