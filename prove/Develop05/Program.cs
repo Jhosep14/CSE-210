@@ -1,4 +1,3 @@
-// EXCEEDS REQUIREMENTS: Added a leveling system that increases the user's level for every 10 goals they complete!
 using System;
 
 class Program
