@@ -1,9 +1,59 @@
 using System;
 
-class Program
+namespace SuperMarket
 {
-    static void Main(string[] args)
+    class Program
     {
-        Console.WriteLine("Hello Foundation2 World!");
+        static void Main(string[] args)
+        {
+            Inventory inventory = new Inventory();
+            inventory.AddProducts();
+            List<Order> orders = new List<Order>();
+            string name;
+            string productID;
+            string productName;
+            double unitPrice;
+            int quantity;
+            Address address;
+            List<Product> products;
+            Order order = null;
+
+            do
+            {
+                Console.WriteLine("Welcome to Super Market Website");
+                Console.WriteLine("--------------------------------------------------");
+                Console.WriteLine("1. Make an order");
+                Console.WriteLine("2. View Shopping Cart");
+                Console.WriteLine("3. Checkout");
+                Console.WriteLine("4. Exit");
+                Console.WriteLine("--------------------------------------------------");
+                Console.WriteLine("Enter your choice: ");
+                int choice = int.Parse(Console.ReadLine());
+                switch (choice)
+                {
+                    case 1:
+                        if (order == null)
+                        {
+                            order = new Order();
+                        }
+                        order.MakeOrder();
+                        break;
+                    case 2:
+                        order?.ViewShoppingCart();
+                        break;
+                    case 3:
+                        order?.Checkout();
+                        break;
+                    case 4:
+                        Environment.Exit(0);
+                        break;
+                    default:
+                        Console.WriteLine("Invalid choice. Please try again.");
+                        break;
+                }
+            }
+            while (true);
+        }
     }
+
 }
