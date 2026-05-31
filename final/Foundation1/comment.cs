@@ -3,11 +3,18 @@ using System.IO;
 using System.Collections.Generic;
 using System.Text.Json;
 
-class Comment : DataStructure
+class Comment
 {
-    public Comment() : base() { }
+    public string _name { get; set; }
+    public string _comment { get; set; }
+
+    public Comment() { }
     
-    public Comment(string name, string comment) : base(name, comment) { }
+    public Comment(string name, string comment)
+    {
+        _name = name;
+        _comment = comment;
+    }
 
     public static List<Comment> LoadComments()
     {
@@ -51,15 +58,9 @@ class Comment : DataStructure
 
     public void DisplayComment()
     {
-        if (Comments != null)
-        {
-            foreach (var comment in Comments)
-            {
-                Console.WriteLine("--------------------------------------------------");
-                Console.WriteLine($"Name: {comment.GetName()}");
-                Console.WriteLine($"Comment: {comment.GetComment()}");
-            }
-            Console.WriteLine("--------------------------------------------------");
-        }
+        Console.WriteLine("--------------------------------------------------");
+        Console.WriteLine($"Name: {_name}");
+        Console.WriteLine($"Comment: {_comment}");
+        Console.WriteLine("--------------------------------------------------");
     }
 }

@@ -2,10 +2,10 @@ namespace SuperMarket
 {
     public class Product
     {
-        public string name {get; set;}
-        public string productID {get; set;}
-        public double unitPrice {get; set;}
-        public int quantity {get; set;}
+        private string name;
+        private string productID;
+        private double unitPrice;
+        private int quantity;
 
         public Product(string name, string productID, double unitPrice, int quantity)
         {
@@ -15,5 +15,14 @@ namespace SuperMarket
             this.quantity = quantity;
         }
 
+        public double GetTotalPrice()
+        {
+            return unitPrice * quantity;
+        }
+
+        public string GetName() { return name; }
+        public string GetProductID() { return productID; }
+        public int GetQuantity() { return quantity; }
+        public double GetUnitPrice() { return unitPrice; }
     }
 }

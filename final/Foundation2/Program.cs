@@ -6,16 +6,6 @@ namespace SuperMarket
     {
         static void Main(string[] args)
         {
-            Inventory inventory = new Inventory();
-            inventory.AddProducts();
-            List<Order> orders = new List<Order>();
-            string name;
-            string productID;
-            string productName;
-            double unitPrice;
-            int quantity;
-            Address address;
-            List<Product> products;
             Order order = null;
 
             do
@@ -28,7 +18,12 @@ namespace SuperMarket
                 Console.WriteLine("4. Exit");
                 Console.WriteLine("--------------------------------------------------");
                 Console.WriteLine("Enter your choice: ");
-                int choice = int.Parse(Console.ReadLine());
+                
+                if (!int.TryParse(Console.ReadLine(), out int choice))
+                {
+                    choice = 0;
+                }
+
                 switch (choice)
                 {
                     case 1:
@@ -55,5 +50,4 @@ namespace SuperMarket
             while (true);
         }
     }
-
 }

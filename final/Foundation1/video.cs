@@ -3,17 +3,50 @@ using System.IO;
 using System.Collections.Generic;
 using System.Text.Json;
 
-class Video : DataStructure
+class Video
 {
-    public Video() : base() { }
+    public string Title { get; set; }
+    public string Author { get; set; }
+    public string Link { get; set; }
+    public int LengthInSeconds { get; set; }
+    public int Index { get; set; }
+    public List<Comment> Comments { get; set; }
+
+    public Video() 
+    {
+        Comments = new List<Comment>();
+    }
     
     public Video(string title, string author, int lengthInSeconds, string link, int index)
-        : base(title, author, lengthInSeconds, link, index)
     {
+        Title = title;
+        Author = author;
+        LengthInSeconds = lengthInSeconds;
+        Link = link;
+        Index = index;
+        Comments = new List<Comment>();
+    }
+
+    public void AddComment(Comment comment)
+    {
+        if (Comments == null)
+        {
+            Comments = new List<Comment>();
+        }
+        Comments.Add(comment);
+    }
+
+    public void RemoveComment(Comment comment)
+    {
+        if (Comments != null)
+        {
+            Comments.Remove(comment);
+        }
     }
 
     public static List<Video> LoadVideos()
     {
+        if (!File.Exists("videos_info.json")) return new List<Video>();
         var videosJson = File.ReadAllText("videos_info.json");
         var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
         return JsonSerializer.Deserialize<List<Video>>(videosJson, options) ?? new List<Video>();
@@ -49,7 +82,7 @@ class Video : DataStructure
                 {
                     if (comment != null)
                     {
-                        Console.WriteLine($"- {comment.GetName()}: \"{comment.GetComment()}\"");
+                        Console.WriteLine($"- {comment._name}: \"{comment._comment}\"");
                     }
                 }
             }

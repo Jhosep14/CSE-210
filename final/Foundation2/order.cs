@@ -1,35 +1,28 @@
+using System;
+using System.Collections.Generic;
+
 namespace SuperMarket
 {
     public class Order
     {
-        public string customerName {get; set;}
-        public string productName {get; set;}
-        public string productID {get; set;}
-        public Address address {get; set;}
-        public List<Product> products {get; set;}
+        private string customerName;
+        private Address address;
+        private List<Product> products;
         
         public Order()
         {
             products = new List<Product>();
         }
 
-        public Order(string customerName, string productName, string productID, Address address, List<Product> products)
-        {
-            this.customerName = customerName;
-            this.productName = productName;
-            this.productID = productID;
-            this.address = address;
-            this.products = products;
-        }
-
-        public virtual double TotalCost() 
+        public double TotalCost() 
         {
             double totalCost = 0;
             foreach (var product in products)
             {
-                totalCost += product.unitPrice * product.quantity;
+                totalCost += product.GetTotalPrice();
             }
-            return totalCost + address.ShippingCost(); 
+            double shippingCost = address != null && address.IsInUSA() ? 5.00 : 35.00;
+            return totalCost + shippingCost; 
         }
 
         public string PackingLabel()
@@ -37,7 +30,7 @@ namespace SuperMarket
             string label = $"Customer Name: {customerName}\nProducts:\n";
             foreach (var product in products)
             {
-                label += $"- {product.name} (ID: {product.productID}) x {product.quantity}\n";
+                label += $"- {product.GetName()} (ID: {product.GetProductID()}) x {product.GetQuantity()}\n";
             }
             return label;
         }
@@ -56,60 +49,52 @@ namespace SuperMarket
             {
                 Console.Write("What is your full name? ");
                 string name = Console.ReadLine();
-                Customer customer = new Customer();
-                customer.SetName(name);
                 this.customerName = name;
 
-                Address address = new Address();
-
                 Console.Write("Enter your country: ");
-                address.SetCountry(Console.ReadLine());
+                string country = Console.ReadLine();
                 Console.Write("Enter your address: ");
-                address.SetAddress(Console.ReadLine());
+                string street = Console.ReadLine();
                 Console.Write("Enter your city: ");
-                address.SetCity(Console.ReadLine());
+                string city = Console.ReadLine();
                 Console.Write("Enter your state: ");
-                address.SetStateProvince(Console.ReadLine());
+                string state = Console.ReadLine();
                 
-                this.address = address;
+                this.address = new Address(street, city, state, country);
             }
-            
-            Inventory Inventory = new Inventory();
-            Inventory.AddProducts();
-            Inventory.DisplayProducts();
 
-            Console.Write("Enter the product ID you want to add to your cart: ");
+            Console.Write("Enter the product name you want to add to your cart: ");
+            string enteredName = Console.ReadLine();
+            
+            Console.Write("Enter the product ID: ");
             string enteredID = Console.ReadLine();
 
-            Product invProduct = Inventory.FindProduct(enteredID);
-            if (invProduct == null)
+            Console.Write("Enter the price per unit: $");
+            if (!double.TryParse(Console.ReadLine(), out double price))
             {
-                Console.WriteLine("Invalid product ID.");
-                return;
+                price = 0.0;
             }
-
-            Console.WriteLine($"Price per unit: ${invProduct.unitPrice}");
 
             Console.Write("Enter the quantity of the product: ");
             if (!int.TryParse(Console.ReadLine(), out int quantity))
             {
-                quantity = 1; // Default fallback
+                quantity = 1; 
             }
 
-            Product product = new Product(invProduct.name, enteredID, invProduct.unitPrice, quantity);
+            Product product = new Product(enteredName, enteredID, price, quantity);
             products.Add(product);
 
-            Console.WriteLine($"{quantity}x {invProduct.name} added to cart!");
+            Console.WriteLine($"{quantity}x {enteredName} added to cart!");
         }
 
         public void ViewShoppingCart()
         {
             foreach (var product in products)
             {
-                Console.WriteLine($"Product Name: {product.name}");
-                Console.WriteLine($"Product ID: {product.productID}");
-                Console.WriteLine($"Product Price: {product.unitPrice}");
-                Console.WriteLine($"Product Quantity: {product.quantity}");
+                Console.WriteLine($"Product Name: {product.GetName()}");
+                Console.WriteLine($"Product ID: {product.GetProductID()}");
+                Console.WriteLine($"Product Price: ${product.GetUnitPrice()}");
+                Console.WriteLine($"Product Quantity: {product.GetQuantity()}");
                 Console.WriteLine("");
             }
         }
@@ -121,7 +106,7 @@ namespace SuperMarket
             Console.WriteLine(PackingLabel());
             Console.WriteLine("Shipping Label:");
             Console.WriteLine(ShippingLabel());
-            Console.WriteLine("Total Cost: " + TotalCost());
+            Console.WriteLine("Total Cost: $" + TotalCost());
         }
     }
 }

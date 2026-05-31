@@ -2,10 +2,8 @@ namespace SuperMarket
 {
     public class Customer
     {
-        public string CustomerName {get; set;}
-        public Address address {get; set;}
-
-        public Customer() {}
+        private string CustomerName;
+        private Address address;
 
         public Customer(string name, Address address)
         {
@@ -22,11 +20,5 @@ namespace SuperMarket
         {
             return address;
         }
-
-        public void SetName(string name)
-        {
-            CustomerName = name;
-        }
-        
     }
 }
