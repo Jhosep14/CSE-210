@@ -2,27 +2,27 @@ namespace SuperMarket
 {
     public class Address
     {
-        private string streetAddress;
-        private string city;
-        private string stateProvince;
-        private string country;
+        private string _streetAddress;
+        private string _city;
+        private string _stateProvince;
+        private string _country;
 
         public Address(string streetAddress, string city, string stateProvince, string country)
         {
-            this.streetAddress = streetAddress;
-            this.city = city;
-            this.stateProvince = stateProvince;
-            this.country = country;
+            _streetAddress = streetAddress;
+            _city = city;
+            _stateProvince = stateProvince;
+            _country = country;
         }
 
         public bool IsInUSA()
         {
-            return this.country == "USA" || this.country == "usa" || this.country == "Usa";
+            return _country == "USA" || _country == "usa" || _country == "Usa";
         }
         
         public string GetAddress()
         {
-            return $"{this.streetAddress}, {this.city}, {this.stateProvince}, {this.country}";
+            return $"{_streetAddress}, {_city}, {_stateProvince}, {_country}";
         }
     }
 }

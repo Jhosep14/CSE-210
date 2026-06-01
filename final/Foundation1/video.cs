@@ -5,12 +5,19 @@ using System.Text.Json;
 
 class Video
 {
-    public string Title { get; set; }
-    public string Author { get; set; }
-    public string Link { get; set; }
-    public int LengthInSeconds { get; set; }
-    public int Index { get; set; }
-    public List<Comment> Comments { get; set; }
+    private string _title;
+    private string _author;
+    private string _link;
+    private int _lengthInSeconds;
+    private int _index;
+    private List<Comment> _comments;
+
+    public string Title { get { return _title; } set { _title = value; } }
+    public string Author { get { return _author; } set { _author = value; } }
+    public string Link { get { return _link; } set { _link = value; } }
+    public int LengthInSeconds { get { return _lengthInSeconds; } set { _lengthInSeconds = value; } }
+    public int Index { get { return _index; } set { _index = value; } }
+    public List<Comment> Comments { get { return _comments; } set { _comments = value; } }
 
     public Video() 
     {
@@ -82,7 +89,7 @@ class Video
                 {
                     if (comment != null)
                     {
-                        Console.WriteLine($"- {comment._name}: \"{comment._comment}\"");
+                        Console.WriteLine($"- {comment.Name}: \"{comment.CommentText}\"");
                     }
                 }
             }

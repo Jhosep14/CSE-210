@@ -2,27 +2,27 @@ namespace SuperMarket
 {
     public class Product
     {
-        private string name;
-        private string productID;
-        private double unitPrice;
-        private int quantity;
+        private string _name;
+        private string _productId;
+        private double _unitPrice;
+        private int _quantity;
 
-        public Product(string name, string productID, double unitPrice, int quantity)
+        public Product(string name, string productId, double unitPrice, int quantity)
         {
-            this.name = name;
-            this.productID = productID;
-            this.unitPrice = unitPrice;
-            this.quantity = quantity;
+            _name = name;
+            _productId = productId;
+            _unitPrice = unitPrice;
+            _quantity = quantity;
         }
 
         public double GetTotalPrice()
         {
-            return unitPrice * quantity;
+            return _unitPrice * _quantity;
         }
 
-        public string GetName() { return name; }
-        public string GetProductID() { return productID; }
-        public int GetQuantity() { return quantity; }
-        public double GetUnitPrice() { return unitPrice; }
+        public string GetName() { return _name; }
+        public string GetProductID() { return _productId; }
+        public int GetQuantity() { return _quantity; }
+        public double GetUnitPrice() { return _unitPrice; }
     }
 }

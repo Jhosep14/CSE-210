@@ -2,23 +2,23 @@ namespace SuperMarket
 {
     public class Customer
     {
-        private string CustomerName;
-        private Address address;
+        private string _customerName;
+        private Address _address;
 
         public Customer(string name, Address address)
         {
-            this.CustomerName = name;
-            this.address = address;
+            _customerName = name;
+            _address = address;
         }
 
         public string GetName()
         {
-            return CustomerName;
+            return _customerName;
         }
 
         public Address GetAddress()
         {
-            return address;
+            return _address;
         }
     }
 }

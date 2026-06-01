@@ -3,10 +3,18 @@ using System.IO;
 using System.Collections.Generic;
 using System.Text.Json;
 
+using System.Text.Json.Serialization;
+
 class Comment
 {
-    public string _name { get; set; }
-    public string _comment { get; set; }
+    private string _name;
+    private string _comment;
+
+    [JsonPropertyName("_name")]
+    public string Name { get { return _name; } set { _name = value; } }
+
+    [JsonPropertyName("_comment")]
+    public string CommentText { get { return _comment; } set { _comment = value; } }
 
     public Comment() { }
     

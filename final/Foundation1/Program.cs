@@ -74,7 +74,7 @@ class Program
                                 Console.WriteLine("Comments:");
                                 for (int i = 0; i < selectedVideo.Comments.Count; i++)
                                 {
-                                    Console.WriteLine($"{i + 1}. @{selectedVideo.Comments[i]._name}: \"{selectedVideo.Comments[i]._comment}\"");
+                                    Console.WriteLine($"{i + 1}. @{selectedVideo.Comments[i].Name}: \"{selectedVideo.Comments[i].CommentText}\"");
                                 }
                                 Console.Write("Select comment number to remove: ");
                                 if (int.TryParse(Console.ReadLine(), out int commentChoice) && commentChoice > 0 && commentChoice <= selectedVideo.Comments.Count)

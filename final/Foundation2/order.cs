@@ -5,30 +5,30 @@ namespace SuperMarket
 {
     public class Order
     {
-        private string customerName;
-        private Address address;
-        private List<Product> products;
+        private string _customerName;
+        private Address _address;
+        private List<Product> _products;
         
         public Order()
         {
-            products = new List<Product>();
+            _products = new List<Product>();
         }
 
         public double TotalCost() 
         {
             double totalCost = 0;
-            foreach (var product in products)
+            foreach (var product in _products)
             {
                 totalCost += product.GetTotalPrice();
             }
-            double shippingCost = address != null && address.IsInUSA() ? 5.00 : 35.00;
+            double shippingCost = _address != null && _address.IsInUSA() ? 5.00 : 35.00;
             return totalCost + shippingCost; 
         }
 
         public string PackingLabel()
         {
-            string label = $"Customer Name: {customerName}\nProducts:\n";
-            foreach (var product in products)
+            string label = $"Customer Name: {_customerName}\nProducts:\n";
+            foreach (var product in _products)
             {
                 label += $"- {product.GetName()} (ID: {product.GetProductID()}) x {product.GetQuantity()}\n";
             }
@@ -37,7 +37,7 @@ namespace SuperMarket
 
         public string ShippingLabel()
         {
-            return $"Customer Name: {customerName}\nCustomer Address: {address?.GetAddress()}\n";
+            return $"Customer Name: {_customerName}\nCustomer Address: {_address?.GetAddress()}\n";
         }
 
         public void MakeOrder()
@@ -45,11 +45,11 @@ namespace SuperMarket
             Console.WriteLine();
             Console.WriteLine("--------------------------------------------------");
 
-            if (string.IsNullOrEmpty(this.customerName))
+            if (string.IsNullOrEmpty(this._customerName))
             {
                 Console.Write("What is your full name? ");
                 string name = Console.ReadLine();
-                this.customerName = name;
+                this._customerName = name;
 
                 Console.Write("Enter your country: ");
                 string country = Console.ReadLine();
@@ -60,7 +60,7 @@ namespace SuperMarket
                 Console.Write("Enter your state: ");
                 string state = Console.ReadLine();
                 
-                this.address = new Address(street, city, state, country);
+                this._address = new Address(street, city, state, country);
             }
 
             Console.Write("Enter the product name you want to add to your cart: ");
@@ -82,14 +82,14 @@ namespace SuperMarket
             }
 
             Product product = new Product(enteredName, enteredID, price, quantity);
-            products.Add(product);
+            _products.Add(product);
 
             Console.WriteLine($"{quantity}x {enteredName} added to cart!");
         }
 
         public void ViewShoppingCart()
         {
-            foreach (var product in products)
+            foreach (var product in _products)
             {
                 Console.WriteLine($"Product Name: {product.GetName()}");
                 Console.WriteLine($"Product ID: {product.GetProductID()}");
